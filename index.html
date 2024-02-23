@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gnosium</title>
+    <link rel="stylesheet" href="index.css">
+</head>
+
+<body>
+    <div id="container">
+
+        <audio id="myAudio">
+            <source src="src/musica.mp3" type="audio/mp3">
+            Your browser does not support the audio element.
+        </audio>
+
+        <h1>Bienvenido a UHUB</h1>
+        <h3>El repositorio para aprobar cualquier asignatura de Ingeniería Informática.</h3>
+        <button onclick="location.href = 'repo.html';">Entrar al repositorio</button>
+
+        <button onclick="playAudio()" type="button" style="width: 100px; height: 100px; position: absolute; left: 0; bottom: 0;"><img
+                src="src/img/play.png" alt="" style="height: 100%; width: 100%; filter: invert(1);"></button>
+
+        <script>
+            let playing = false;
+            var x = document.getElementById("myAudio");
+
+            function playAudio() {
+                if (!playing) {
+                    playing = true;
+                    x.play();
+                }
+                else {
+                    playing = false;
+                    x.pause();
+                }
+            }
+        </script>
+    </div>
+</body>
+
+</html>

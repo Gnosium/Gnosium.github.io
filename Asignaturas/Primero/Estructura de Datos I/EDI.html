@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gnosium</title>
+    <link rel="stylesheet" href="../../Comun/common.css">
+</head>
+
+<body>
+    <div id="container">
+        <div id="index-container">
+            <h1>Índice</h1>
+            <div id="index-buttons"></div>
+        </div>
+        <div id="info-container">
+            <h1>Estructura de Datos I</h1>
+            <h2>¿Qué es una estructura de datos?</h2>
+            <p>
+                Una estructura de datos es simplemente un tipo de datos como podrían serlo un int,
+                un float o un boolean, pero que en lugar de almacenar un solo dato, permite almacenar
+                varios de ellos y además de forma ordenada y proporcionando mecanismos para un
+                manejo sencillo de estos datos.
+            </p>
+
+            <h2>¿Qué beneficios aporta una estructura de datos frente a un array?</h2>
+            <p>
+                La principal ventaja es que los arrays por lo general son de tamaño estático, es decir,
+                cuando creas un array, debes indicar cual es su tamaño, por ejemplo 10, y con eso el
+                array solo podrá guardar 10 elementos. Esto no ocurre con las estructuras de datos,
+                las cuales pueden ir creciendo y decreciendo dinámicamente en tiempo real.
+            </p>
+
+            <h2>¿Qué tipos de estructuras de datos existen?</h2>
+            <p>
+                Existen muchos tipos de datos, algunos los veremos en proximas asignaturas como los
+                arboles o los grafos, pero de momento para esta asignatura nos bastará con manejar
+                pilas, colas y listas.
+            </p>
+            <h3>Pilas o stacks</h3>
+            <p>
+                Las pilas son estructuras de datos que almacenan y sacan la información por el
+                mismo elemento. ¿Como podemos visualizar esto? Imaginemos un paquete de galletas.
+            </p>
+            <img src="Pila1.png" alt="">
+            <p>
+                Como vemos, si queremos sacar una galleta, siempre vamos a coger la que está
+                arriba del todo, y si queremos guardar una galleta, la vamos a poner arriba
+                del todo también, a eso nos referimos cuando decimos que almacenamos y sacamos
+                la información por el mismo elemento, siempre operamos sobre el elemento más alto,
+                también llamado cima o top.
+                Veamos un ejemplo de como funciona una pila.
+            </p>
+            <br>
+            <br>
+            <img src="codePila1.png" alt="">
+            <p>
+                Lo que ocurre en el código anterior es lo siguiente:
+            </p>
+            <ul>
+                <li>Creamos la pila que contendrá solo elementos int.</li>
+                <li>Apilamos los valores 3, 6 y 5, en ese orden.</li>
+                <li>Miramos el tamaño de la pila, en este caso será 3, ya que hemos añadido 3 elementos</li>
+                <li>Desapilamos 2 elementos, como se desapilan los que están mas arriba, es decir, los últimos que se
+                    han apilado, se eliminan el 5 y el 6</li>
+                <li>Miramos el tamaño, que ahora será 1, y la cima, es decir, el elemento que está en la primera
+                    posición de la pila, en este caso es el 3</li>
+                <li>Desapilamos el siguiente caso, en este caso el 3</li>
+                <li>Miramos el tamaño de la pila, veremos que ahora es 0, ya que no quedan elementos</li>
+            </ul>
+            <p>Ilustremos con una imagen para que quede más claro.</p>
+            <img src="Pila2.png" alt="">
+            <h4>Operaciones comunes con pilas</h4>
+            <h5>Invertir pila</h5>
+            <img src="codePila2.png" alt="">
+            <h5>Copiar pila</h5>
+            <img src="codePila3.png" alt="">
+            <h5>Eliminar elemento x de una pila</h5>
+            <img src="codePila4.png" alt="">
+            <h4>Usos de una pila</h4>
+            <p>
+                Las pilas son usadas en validación paréntesis, por ejemplo
+                si tienes un texto y quieres comprobar si todos los paréntesis y llaves
+                están cerrados los metes en una pila y cuentas cuantos hay abiertos y
+                cuantos cerrados y así sabes si está todo correcto. También se usan
+                para guardar un historial, ya sea de navegación en un buscador o para
+                guardar acciones recientes, por ejemplo cuando hacemos Ctrl+Z.
+            </p>
+            <h3>Colas o queues</h3>
+            <p>
+                Las colas son estructuras de datos que almacenan datos por el final y
+                sacan los elementos por el principio, tal como funcionaría una cola de
+                supermercado. Vamos a verlo.
+            </p>
+            <img src="Cola1.png" alt="">
+            <p>
+                El funcionamiento de la cola es sencillo e intuitivo, los elementos van
+                entrando por el final y saliendo por el principio, por lo que vamos a
+                tener los elementos ordenados por orden de llegada, al contrario que
+                en la pila, donde los elementos estaban ordenados al revés de su llegada.
+            </p>
+            <br>
+            <br>
+            <p>Veamos un ejemplo sencillo de código</p>
+            <img src="codeCola1.png" alt="">
+            <p>
+                Vamos a explicar esto:
+            </p>
+            <ul>
+                <li>Creamos la cola que almacenará elemetos int.</li>
+                <li>Encolamos los elementos 3, 6 y 5, en ese orden, los elementos entrarán por el final de la cola.</li>
+                <li>Mostramos el primero, el último y el tamaño, serán 3, 5 y 3 respectivamente.</li>
+                <li>Desencolamos 2 elementos, es decir, los sacamos por el principio de la cola.</li>
+                <li>Mostramos el primero, el último y el tamaño, serán 3, 3 y 1 respectivamente. Observamos que el
+                    primer y último elemento son el mismo.</li>
+                <li>Desencolamos el último elemento.</li>
+                <li>Mostramos el tamaño, que ahora será 0.</li>
+            </ul>
+            <h3>Listas o lists</h3>
+        </div>
+        <div id="files-container">
+            <h1>Material adjunto</h1>
+            <div id="file-list"></div>
+        </div>
+        <script src="../../Comun/common.js"></script>
+        <script>
+            loadFiles("./src");
+        </script>
+</body>
+
+</html>

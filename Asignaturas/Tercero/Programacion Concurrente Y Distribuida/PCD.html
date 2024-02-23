@@ -1,0 +1,368 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gnosium</title>
+    <link rel="stylesheet" href="../../Comun/common.css">
+</head>
+<body>
+    <div id="container">
+        <div id="index-container">
+            <h1>Índice</h1>
+            <div id="index-buttons"></div>
+        </div>
+        <div id="info-container">
+            <h1>Programación concurrente y distribuida</h1>
+            <h2>Teoría</h2>
+            <p>
+                En este apartado vamos a centrarnos en el examen de teoría pregunta por pregunta.
+                Intentaremos abarcar todos los posibles ejercicios y las variantes que se nos
+                puedan presentar para poder resolverlos en cualquier caso. Vamos a verlos.
+            </p>
+            <h3>Ejercicio teórico</h3>
+            <p>
+                La teoría de esta asignatura es extensa, pero podemos resumirla con las siguientes
+                preguntas.
+            </p>
+            <h3>Ventajas de los sistemas distribuidos</h3>
+            <p>
+                Un sistema distribuido es más económico que un gran servidor, ya que
+                varios ordenadores poco potentes son más baratos que un solo ordenador
+                muy potente, la escalabilidad también es sencilla, ya que consiste
+                simplemente en agregar mas ordenadores a la red, son seguros, ya que
+                los ordenadores pueden estar separados geográficamente y además si
+                un ordenador falla, el sistema puede seguir funcionando.
+            </p>
+            <h3>Desventajas de los sistemas distribuidos</h3>
+            <p>
+                Un sistema distribuido es dependiente de la red de ordenadores para
+                funcionar, si esta falla el sistema cae, la saturación de la red
+                degrada el sistema y reforzarlo es caro, además, hay que implementar
+                mecanimos de seguridad complejos ya que se debe proteger la información
+                la cual puede ser accedida remotamente desde varios ordenadores.
+            </p>
+            <h3>Tipos de sistemas distribuidos</h3>
+            <p>
+                Hay cuatro principales tipos de Sistemas Distribuidos:
+            </p>
+            <ul>
+                <li>
+                    Arquitectura Cliente-Servidor: Se basa en una comunicación sin conexión.
+                    Hay un servidor que presta un servicio y un cliente que los usa. La comunicación
+                    es a través de paso de mensajes con las primitivas send y receive.
+                </li>
+                <li>
+                    Llamada a procedimientos remotos (RPC): Engloba el cliente-servidor y la
+                    programación convencional. El cliente envía peticiones de procedimientos 
+                    que se ejecutan en otro proceso y posiblemente otra máquina. Hay paso de 
+                    mensajes transparente entre cliente y servidor, para recibir el procedimiento 
+                    los parámetros y el cliente el resultado.
+                </li>
+                <li>
+                    Objetos distribuidos (RMI): Extiende la programación orientada a objetos
+                    a los sistemas distribuidos. La finalidad es diseñar e implementar sistemas 
+                    distribuidos que se estructuren como colecciones de componentes modulares (objetos) 
+                    que puedan ser manejados fácilmente y organizados en capas para ocultar la 
+                    complejidad del diseño. Ofrecen la posibilidad de invocar y pasar como 
+                    argumento diferentes ”comportamientos” además de poder aplicar patrones 
+                    de diseño orientados a objetos en la implementación del sistema distribuido.
+                </li>
+                <li>
+                    Comunicación de grupos: La idea básica es que un mensaje que se envíe al
+                    grupo es recibido por todos los integrantes del mismo. Un grupo es un
+                    conjunto de procesos que normalmente se encuentran en diferentes máquinas
+                    formando un sistema distribuido, además son dinámicos, por lo que se
+                    pueden añadir y eliminar procesos o crear y eliminar grupos.
+                </li>
+            </ul>
+            <h3>El problema de paso por parámetros en RPC</h3>
+            <p>
+                El paso de parámetros por RPC presenta principalmente dos problemas, que son
+                los siguientes:
+            </p>
+            <ul>
+                <li>
+                    Problema de la representación de la información: Equipos distintos pueden
+                    usar diferentes estándares para representar la información, por ejemplo
+                    un ordenador de 32 bits y otro de 64 bits. Para solucionar esto podemos
+                    establecer un formato unificado al que traducir la información antes de
+                    enviarla para que siempre se use la misma, o por otro lado podemos enviar
+                    la información sin traducir pero con información de nuestro hardware
+                    para que sea el equipo destinatario el que realice la traducción.
+                </li>
+                <li>
+                    Problema de la memoria no compartida: Al ser dos equipos diferentes, la
+                    memoria no es compartida, por tanto el paso de punteros o parámetros por
+                    variable no es posible, además estructuras más complejas como árboles o
+                    listas enlazadas tampoco pueden pasarse.
+                </li>
+            </ul>
+            <h3>Algoritmos de sincronización de relojes</h3>
+            <h4>Algoritmo de Lamport</h4>
+            <p>
+                En el contexto de la sincronización de relojes y relojes lógicos, el algoritmo 
+                de Lamport se presenta como una herramienta para establecer un orden entre 
+                sucesos relacionados, enfocándose en la secuencia de eventos más que en la 
+                hora exacta. Este algoritmo define una relación de orden ("a ocurre antes que b") 
+                para eventos a y b, considerando situaciones como el envío y recepción de 
+                mensajes entre procesos. A partir de esta relación, se construye un reloj 
+                lógico mediante una función c(x), donde cada proceso guarda su propio reloj 
+                lógico (cp), y cada evento se etiqueta con el valor del reloj, denominado 
+                timestamp. Por ejemplo, al enviar un mensaje, se transporta el valor del reloj 
+                lógico del proceso emisor, y al recibirlo, se calcula el máximo entre el reloj 
+                del receptor y el valor del mensaje antes de etiquetar el evento. Este enfoque 
+                facilita la comprensión del orden temporal de eventos en sistemas distribuidos.
+            </p>
+            <h4>Algoritmo de Cristian</h4>
+            <p>
+                Tenemos una fuente de hora UTC que proporciona la hora correcta a una de las
+                máquinas del sistema y este se la reenvía a los dos demás, pero esto tiene
+                algunos problemas.
+            </p>
+            <ul>
+                <li>
+                    El reloj no puede ir atrás en el tiempo, por tanto para hacer algún ajuste
+                    en la hora solo podemos ralentizar los ticks de reloj o directamente
+                    omitirlos para ajustarnos a la hora real.
+                </li>
+                <li>
+                    Cuando los equipos reciben el mensaje con la hora, este habrá tardado tiempo
+                    en llegar, por lo que la hora no será del todo correcta, podemos ajustarlo un
+                    poco reenviando el mensaje y cuando nos vuelva, dividimos el tiempo desde que
+                    lo enviamos hasta que lo recibimos de vuelta entre 2 y ese tiempo se lo
+                    restamos a la hora que nos envíe el reloj en la próxima sincronización y
+                    tendremos así una hora más ajustada.
+                </li>
+            </ul>
+            <h4>Algoritmo de Berkeley</h4>
+            <p>
+                Un equipo mide periódicamente la hora entre todas las máquinas, calcula la media 
+                y la redistribuye. Podemos mejorar este algoritmo eliminando la centralización, 
+                y distribuyendo la tarea entre todas las máquinas de manera que cada computador 
+                realice su propio escrutinio.
+            </p>
+            <h3>Algoritmos de exclusión mutua</h3>
+            <h4>Algoritmo de Ricart y Agrawala</h4>
+            <p>
+                Requiere comunicación de mensajes no nulos entre procesos, comunicación en zona 
+                crítica o no crítica, comunicación fiable y mensajes en orden y relación de 
+                orden total entre los eventos del sistema.
+                Un proceso que quiera entrar a la región crítica difunde un mensaje con etiqueta 
+                temporal entre los demás procesos pidiendo permiso, solo podrá entrar si todos 
+                los demás se lo conceden. Cada proceso tiene una cola de peticiones no respondidas. 
+                Cuando un proceso recibe una petición:
+            </p>
+            <ul>
+                <li>
+                    Si no está en región crítica ni quiere entrar le concede permiso inmediatamente.
+                </li>
+                <li>
+                    Si está en la región crítica, termina y envía el permiso.
+                </li>
+                <li>
+                    Si no está en la región crítica y quiere entrar y ha enviado una petición, acepta 
+                    la petición que le ha llegado solo si la etiqueta temporal es anterior a la de su 
+                    propia petición. Si su propia petición es la anterior a la solicitada, le da 
+                    permiso inmediatamente después de salir de la región crítica.
+                </li>
+            </ul>
+            <p>
+                Problemas: por n procesos hay 2(n – 1) mensajes, además de n puntos de fallo, ya que si un proceso falla los demás se quedan sin entrar a la región crítica.
+            </p>
+            <h4>Algoritmo en anillo</h4>
+            <p>
+                Los procesos que compiten por entrar en la zona crítica se pasan de forma cíclica 
+                un testigo que les da acceso a la región crítica. Cuando salen de ella o no quieren 
+                entrar pasan el testigo. Problema: si nadie quiere entrar, hay un mensaje 
+                reenviándose todo el rato
+            </p>
+            <h4>Algoritmo del matón</h4>
+            <p>
+                Muchos algoritmos se basan en la utilización de un proceso coordinador. Para evitar 
+                que éste sea un punto de fallo, es necesario que los procesos puedan elegir nuevos 
+                coordinadores. El algoritmo del matón soluciona este problema. Cada vez que un 
+                proceso P se integra en el grupo o se da cuenta de que el coordinador ha caído, 
+                inicia el proceso de elección. El proceso de elección consiste en lo siguiente:
+            </p>
+            <ul>
+                <li>
+                    P envía un mensaje a los procesos con identificador mayor que P.
+                </li>
+                <li>
+                    Si no responde ninguno, P es el nuevo coordinador; si responde alguno, 
+                    P no puede ser el coordinador.
+                </li>
+                <li>
+                    Si un proceso Q recibe un mensaje, lo responde, y además envía mensajes 
+                    a todos los procesos con identificador mayor que Q. Si no responde nadie, 
+                    Q es el nuevo coordinador
+                </li>
+            </ul>
+
+            <h3>Ejercicio de condiciones de Bernstein</h3>
+            <h3>Ejercicio de exclusión mutua</h3>
+            <p>
+                Este es un ejercicio sencillo, nos dan un trozo de código y nos preguntan si se
+                cumple la exclusión mutua, lo que viene a decir si se cumple que solo uno de los
+                procesos entra a la sección crítica simultáneamente. Estos ejercicios se pueden
+                sacar con lógica simplemente observando la estructura del código, veamos un
+                ejemplo.
+            </p>
+            <div class="img-block">
+                <img src="codeEM1.png" alt="">
+                <img src="codeEM2.png" alt="">
+            </div>
+            <p>
+                Si tomamos m como una variable global inicialmente con valor 0 podemos decir que
+                se cumple la exclusión mutua, ya que para acceder a la sección crítica los procesos
+                deben tener su n distinta de 0. Inicialmente solo P1 tiene la n distinta de 0, por
+                lo que puede entrar a la zona crítica, mientras que P0 se queda en el bucle recibiendo
+                el valor de m, que siempre es 0, por lo que no sale del bucle. Una vez P1 acaba su
+                sección crítica pone la m a 1, P0 consigue entonces que su n sea 1, sale del bucle, 
+                ejecuta su sección crítica y acaba el programa sin que varios procesos hayan
+                accedido simultáneamente a la sección crítica.
+            </p>
+            <p>
+                Este ejercicio puede tener una variante donde se utilizan unas instrucciones concretas. 
+                Estas instrucciones son todas atómicas, lo que quiere decir que nunca van a ocurrir
+                dos de estas operaciones a la vez aunque dos procesos concurrentes lo intentes.
+                Las operaciones que pueden aparecer son las siguientes:
+            </p>
+            <ul>
+                <li>Exchange: La instrucción exhange(r,m) intercambia los valores de r y m.</li>
+                <li>Subc: La instrucción subc(r,m) decrementa en 1 el valor de m y lo copia en r.</li>
+                <li>Addc: La instrucción addc(r,m) aumenta en 1 el valor de m y lo copia en r.</li>
+                <li>Testc: La instrucción testc(m) devulve true si m es 0 y pone m a 1, si m es distinta de 0 devuelve false.</li> 
+            </ul>
+            <p>
+                Veamos el ejemplo de antes utilizando ahora la instrucción exchange.
+            </p>
+            <div class="img-block">
+                <img src="codeEM3.png" alt="">
+                <img src="codeEM4.png" alt="">
+            </div>
+            <p>
+                El ejemplo es el mismo que antes, mientras P0 se queda en el bucle, P1 hace su
+                sección crítica y una vez acaba intercambia su valor 1 de la n con el 0 de la m,
+                P0 en el bucle recoge ese valor 1 de la m y le deja su 0, sale del bucle, hace
+                su sección crítica y devuelve el valor 1 con exchange.
+            </p>
+            <h3>Ejercicio de secuencia con semáforos</h3>
+            <p>
+                Este ejercicio es muy sencillo y se puede mecanizar de forma muy sencilla, vamos 
+                a ver cómo. 
+            </p>
+            <p>
+                En primer lugar se nos plantea una secuencia de procesos que tienen 
+                que ocurrir en un orden, pongamos como ejemplo P1 P1 P2 P3 P1. ¿Qué significa 
+                esto? Pues lo que esto significa es que los procesos deben acceder a su sección 
+                crítica en ese orden, además también se nos pide inicializar correctamente los 
+                semáforos. Vayamos por partes.
+            </p>
+            <p>
+                En primer lugar debemos saber cuantos semáforos vamos a tener, y siempre van 
+                a ser tantos como procesos hayas, en esto caso 3, por tanto tendremos los 
+                semáforos s1, s2 y s3.
+                Para inicializar los semáforos correctamente seguiremos un método muy simple, 
+                tenemos que ver cual es el primer proceso que ocurre, en este caso es P1, luego 
+                nos debemos preguntar cuántas veces ocurre seguidas antes de que entre otro 
+                proceso, en este caso dos veces, ya que ocurre P1 , después P1 de nuevo y finalmente
+                P2. Con esta información de que el primer proceso que ocurre es P1 y 
+                que ocurre dos veces antes de que entre otro proceso vamos a inicializar el 
+                semáforo s1 a 2 y los semáforos de s2 y s3 a 0.
+            </p>
+            <p>
+                Una vez inicializados los semáforos nos toca programar la lógica de la secuencia. 
+                Veamos un poco de código.
+            </p>
+            <div class="img-block">
+                <img src="codeSS1.png" alt="">
+                <img src="codeSS2.png" alt="">
+                <img src="codeSS3.png" alt="">
+            </div>
+            <p>
+                Los semáforos funcionan de la siguiente forma. Tienen un contador interno, ese contador 
+                se decrementa cuanto se hace acquire() sobre ellos y se incrementa cuando se hace 
+                release(). Si el semáforo está a 0 el proceso que haga acquire de ese semáforo se 
+                quedará esperando hasta que alguien haga un release.
+            </p>
+            <p>
+                Sabiendo ahora como funcionan, veamos el mecanismo para hacer este ejercicio. En primer 
+                lugar, debemos ver la secuencia y analizar cada proceso a que tiene que dar paso, vamos 
+                a explicar esto.
+            </p>
+            <p>
+                Tenemos la secuencia P1 P1 P2 P3
+            </p>
+            <ul>
+                <li>El proceso P2 siempre tiene como siguiente proceso un proceso P3</li>
+                <li>
+                    El proceso P3 siempre tiene como siguiente proceso dos procesos P1, ya que 
+                    como el ciclo empieza de nuevo tiene dos P1 justo después de el.
+                </li>
+                <li>
+                    El proceso P1 por otro lado tiene en su primera entrada otro proceso P1 como 
+                    siguiente, mientras que el segundo P1 tiene como siguiente un proceso P2.
+                </li>
+            </ul>
+            <p>
+                Una vez analizada la secuencia completa debemos programar la solución. Para los 
+                los procesos del tipo P2 y P3 que vemos que su siguiente proceso siempre es igual y 
+                no varía la solución es instantánea, tendrán un acquire de su semáforo antes de la 
+                sección crítica y harán tantos release del semáforo de su siguiente proceso como procesos 
+                del mismo tipo le sigan.
+            </p>
+            <p>
+                El proceso P1 sin embargo, al tener dos posibles caminos a tomar debe tener un if. 
+                En primer lugar antes de la sección crítica haremos un acquire de su semáforo. Después de 
+                la sección crítica haremos un if para ver a que proceso debemos ir. En este caso, la lógica 
+                del if será la siguiente. Cuando P1 se ejecute por primera vez debe ir a P1 de nuevo, 
+                cuando se ejecute por segunda vez debe de ir a P2. Veamos el código ya resuelto.
+            </p>
+            <div class="img-block">
+                <img src="codeSS4.png" alt="">
+                <img src="codeSS5.png" alt="">
+            </div>
+            <div class="img-block">
+                <img src="codeSS6.png" alt="">
+                <img src="codeSS7.png" alt="">
+            </div>
+            <p>
+                Como últimos apuntes, cabe aclarar que en el if de P1, en la primera ejecución no se hace 
+                ningún release ya que el siguiente proceso es P1 de nuevo y en esos casos no hay que hacer 
+                el release. También cabe aclarar que si la secuencia fuera por ejemplo P1 P1 P2 P1 P3, el 
+                semáforo s1 se iniciaría igualmente a 2 aunque haya tres P1 en la secuencia, ya que estamos 
+                contando cuantas veces ocurre seguidas el primer proceso que entra.
+            </p>
+            <h3>Ejercicio de grafo de precedencia con semáforos</h3>
+            <h3>Ejercicio de interbloqueos con algoritmo del banquero</h3>
+            <h3>Ejercicio de interbloqueos con grafo</h3>
+            <h3>Problema monitores buzones y canales</h3>
+            <h4>Monitores</h4>
+            <h4>Buzones</h4>
+            <h4>Canales</h4>
+
+            <h2>Prácticas</h2>
+            <h3>Conceptos básicos de concurrencia</h3>
+            <h4>Hilos</h4>
+            <h4>Prioridad</h4>
+            <h4>Canvas</h4>
+            <h3>Wait y notify</h3>
+            <h3>ReentrantLock y Conditions</h3>
+            <h3>ThreadPool</h3>
+            <h3>RMI</h3>
+            <h3>Semáforos</h3>
+            <h3>Buzones</h3>
+        </div>
+        <div id="files-container">
+            <h1>Material adjunto</h1>
+            <div id="file-list"></div>
+        </div>
+        <script src="../../Comun/common.js"></script>
+        <script>
+            loadFiles("./src");
+        </script>
+    </div>
+</body>
+</html>

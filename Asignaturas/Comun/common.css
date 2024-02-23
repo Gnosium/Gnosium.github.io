@@ -1,0 +1,161 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap');
+
+body {
+    margin: 0 auto;
+    padding: 0 auto;
+    font-family: "Inter", sans-serif;
+    font-optical-sizing: auto;
+    font-style: normal;
+    font-variation-settings: "slnt" 0;
+}
+
+#container {
+    width: 100%;
+    height: auto;
+    min-height: 100vh;
+    background-color: black;
+    display: flex;
+    justify-content: center;
+    flex-direction: row;
+    color: white;
+    background-size: cover;
+    background-position: relative;
+    text-align: center;
+}
+
+#index-container {
+    width: 30%;
+    height: 100vh;
+    background-color: #121212;
+    overflow-y: auto;
+    position: sticky;
+    top: 0;
+}
+
+#files-container {
+    width: 30%;
+    height: 100vh;
+    background-color: #121212;
+    overflow-y: auto;
+    position: sticky;
+    top: 0;
+}
+
+.file-button {
+    height: 6vh;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.file-buttonarea button {
+    height: 65%;
+    width: auto;
+    aspect-ratio: 1;
+    border: none;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-left: 12px;
+    border-radius: 12px;
+    background-color: #242424;
+    cursor: pointer;
+}
+
+.file-buttonarea button > img {
+    filter: invert(0.6);
+}
+
+.file-buttonarea button:hover {
+    background-color: #323232;
+}
+
+.file-textarea {
+    flex-grow: 1;
+    padding: 10px;
+    box-sizing: border-box;
+}
+
+.file-buttonarea {
+    display: flex;
+    align-items: center;
+    height: 100%;
+    padding-right: 24px;
+}
+
+#index-buttons {
+    display: flex;
+    flex-direction: column;
+}
+
+#index-buttons > button {
+    height: 5vh;
+    border: none;
+    background-color: #121212;
+    color: white;
+    cursor: pointer;
+    text-align: justify;
+    padding-left: 12px;
+    transition: 0.1s;
+}
+
+#index-buttons > button.h1 {
+    font-weight: bold;
+    text-decoration: underline;
+}
+
+#index-buttons > button.h2 {
+    font-weight: bold;
+}
+#index-buttons > button.h3 {
+    padding-left: 24px;
+}
+#index-buttons > button.h4 {
+    padding-left: 36px;
+}
+#index-buttons > button.h5 {
+    padding-left: 48px;
+}
+
+#index-buttons > button.h6 {
+    padding-left: 60px;
+}
+
+#index-buttons > button:hover {
+    background-color: #212121;
+    color: white;
+    font-size: 16px;
+}
+
+#info-container {
+    height: 100%;
+    min-height: 100vh;
+    width: 40%;
+    border: 1px solid #424242;
+    padding-left: 2%;
+    padding-right: 2%;
+}
+
+.img-block {
+    width: 100%;
+    height: auto;
+    display: flex;
+}
+
+p {
+    text-align: justify;
+}
+
+ul {
+    text-align: justify;
+}
+
+li {
+    margin-bottom: 20px;
+}
+
+img {
+    width: 90%;
+    height: auto;
+}
