@@ -48,3 +48,22 @@ button:hover {
     background-color: white;
     color: black;
 }
+
+#audio-button {
+    width: 100px;
+    height: 100px;
+    position: absolute;
+    left: 0;
+    bottom: 0;
+}
+
+@media only screen and (max-width: 768px) {
+    button {
+        height: 10%;
+        width: 80%;
+    }
+
+    #audio-button {
+        display: none;
+    }
+}

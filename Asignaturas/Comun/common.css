@@ -159,3 +159,16 @@ img {
     width: 90%;
     height: auto;
 }
+
+/* Agrega este bloque de estilos al final de tu CSS */
+
+@media only screen and (max-width: 768px) {
+    #index-container,
+    #files-container {
+        display: none; /* Oculta los contenedores en dispositivos móviles */
+    }
+
+    #info-container {
+        width: 100%; /* Ocupa toda la pantalla en dispositivos móviles */
+    }
+}
